@@ -14,3 +14,12 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->group(['prefix' => 'api'], function () use ($router) {
+    $router->get('users', 'UserController@getUsers');
+    $router->get('users/{$userId}', 'UserController@getUser');
+    $router->post('users', 'UserController@postUser');
+    $router->put('users/{$userId}', 'UserController@putUser');
+    $router->patch('users/{$userId}', 'UserController@patchUser');
+    $router->delete('users/{$userId}', 'UserController@deleteUser');
+});
