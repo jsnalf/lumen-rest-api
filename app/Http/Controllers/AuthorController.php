@@ -33,6 +33,12 @@ class AuthorController extends Controller
 
   public function update(Request $request, $id)
   {
+    $this->validate($request, [
+      'first_name' => 'required|alpha',
+      'email' => 'required|email|unique:authors',
+      'age' => 'required|integer'
+    ]);
+
     $author = Author::findOrFail($id);
     $author->update($request->all());
 
