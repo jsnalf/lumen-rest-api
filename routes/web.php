@@ -16,10 +16,9 @@ $router->get('/', function () use ($router) {
 });
 
 $router->group(['prefix' => 'api'], function () use ($router) {
-    $router->get('users', 'UserController@getUsers');
-    $router->get('users/{$userId}', 'UserController@getUser');
-    $router->post('users', 'UserController@postUser');
-    $router->put('users/{$userId}', 'UserController@putUser');
-    $router->patch('users/{$userId}', 'UserController@patchUser');
-    $router->delete('users/{$userId}', 'UserController@deleteUser');
+    $router->get('authors', 'AuthorController@showAllAuthors');
+    $router->get('authors/{$id}', 'AuthorController@showOneAuthor');
+    $router->post('authors', 'AuthorController@create');
+    $router->put('authors/{$id}', 'AuthorController@update');
+    $router->delete('authors/{$id}', 'AuthorController@delete');
 });
