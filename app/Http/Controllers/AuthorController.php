@@ -10,7 +10,7 @@ class AuthorController extends Controller
 
   public function showAllAuthors()
   {
-    return response()->json(Author::all());
+    return response()->json(author::all());
   }
 
   public function showOneAuthor($id)
@@ -20,12 +20,18 @@ class AuthorController extends Controller
 
   public function create(Request $request)
   {
+    $this->validate($request, [
+      'first_name' => 'required|alpha',
+      'email' => 'required|email|unique:authors',
+      'age' => 'required|integer'
+    ]);
+
     $author = Author::create($request->all());
 
     return response()->json($author, 201);
   }
 
-  public function update($id, Request $request)
+  public function update(Request $request, $id)
   {
     $author = Author::findOrFail($id);
     $author->update($request->all());
